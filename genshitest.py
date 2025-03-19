@@ -3,9 +3,18 @@ from telegram.ext import Updater, CommandHandler, CallbackContext
 from pymongo import MongoClient
 from decouple import config
 import requests
+import logging
+
+# Enable logging
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
+
+logger = logging.getLogger(__name__)
 
 # Load the connection string from the .env file
-MONGODB_URI = config("mongodb+srv://jinwoo210606:<uvnQf4Mw1irCo6z2>@cluster0.beb11.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+MONGODB_URI = config("MONGODB_URI")
 
 # Connect to MongoDB
 client = MongoClient(MONGODB_URI)
@@ -96,7 +105,7 @@ def show_daily_note(update: Update, context: CallbackContext) -> None:
 
 def main() -> None:
     # Replace 'YOUR_API_TOKEN' with your bot's API token
-    updater = Updater(config("7605487283:AAEqVUtr6kxJ-12mW36iEf9hk97vH1apVkQ"))
+    updater = Updater(config("YOUR_API_TOKEN"))
 
     dispatcher = updater.dispatcher
 
